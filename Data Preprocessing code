@@ -1,0 +1,32 @@
+# Data Preprocessing
+## 1) Lower case
+## 2) Tokenization (seperate in words)
+## 3) Removing special characters
+## 4) Removing stop words and punctuation
+## 5) Stemming 
+
+def transform_Message(Message):
+    Message = Message.lower()
+    Message = nltk.word_tokenize(Message)
+    
+    y = []
+    for i in Message:
+        if i.isalnum():
+            y.append(i)
+
+    Message = y[:] #here we colone the text
+    y.clear()
+
+    #here we remove the stopwords and punctuation
+    for i in Message:
+        if i not in stopwords.words('english') and i not in string.punctuation:
+            y.append(i)
+
+    Message = y[:]
+    y.clear()
+    
+    for i in Message:
+        y.append(ps.stem(i)) #here we are doing stemming
+
+    
+    return " ".join(y)
